@@ -1,9 +1,7 @@
 //O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. Aqui você deverá desenvolver a lógica para resolver o problema.
 let amigos = [];
-let amigosSorteados = [];
 
 function adicionarAmigo() {
-    console.log(amigos);
     let adcionar = document.querySelector('input').value;
     if (adcionar == '') {
         alert('Você precisa inserir um nome');
@@ -13,7 +11,6 @@ function adicionarAmigo() {
     } else {
         amigos.push(adcionar);
         limparCampo();
-        console.log(amigos);
     }
 } 
 
@@ -37,27 +34,21 @@ function obterAmigo(lista) {
 
 function sortearAmigo() {
     // Verifica se todos os amigosjá foram sorteados
-    if (amigosSorteados.length === amigos.length) {
+    if (amigos.length === 0) {
         alert('Todos os amigos já foram sorteados!');
         return;
     }
-
     const itemAmigo = obterAmigo(amigos);
-    seuNome = prompt('Digite seu nome para sortear seu amigo secreto:')
+    seuNome = prompt('Digite seu nome para sortear seu amigo secreto:');
     if (seuNome == itemAmigo) {
         alert('Seu amigo secreto e voce mesmo, sorteando nobamente');
-        return sortearAmigo()
-    }
-    if (amigosSorteados.includes(itemAmigo)) {
-        alert('Este amigo já foi sorteado, fazendo novo sorteio...');
         return sortearAmigo();
-    } else {
-        amigosSorteados.push(itemAmigo);
-        alert(`Seu Amigo Secreto é: ${itemAmigo}`);
-        console.log(amigosSorteados);
     }
+    else {
+        alert(`Seu Amigo Secreto é: ${itemAmigo}`);
+    }
+    removeAmigo(itemAmigo);
 }
-
 
 function limparCampo() { 
     adcionar = document.querySelector('input');
@@ -67,4 +58,11 @@ function limparCampo() {
 function limpaLista() {
     let lista = document.querySelector('ul');
     lista.innerHTML = '';
+}
+
+function removeAmigo(amigo) {
+    let indice = amigos.indexOf(amigo);
+    if (indice > -1) {
+        amigos.splice(indice, 1);
+    }
 }
